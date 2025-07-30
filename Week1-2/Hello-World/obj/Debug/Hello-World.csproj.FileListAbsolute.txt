@@ -1,0 +1,7 @@
+E:\WorkSpace\Intern\Week1-2\Hello-World\bin\Debug\Hello-World.exe.config
+E:\WorkSpace\Intern\Week1-2\Hello-World\bin\Debug\Hello-World.exe
+E:\WorkSpace\Intern\Week1-2\Hello-World\bin\Debug\Hello-World.pdb
+E:\WorkSpace\Intern\Week1-2\Hello-World\obj\Debug\Hello-World.csproj.AssemblyReference.cache
+E:\WorkSpace\Intern\Week1-2\Hello-World\obj\Debug\Hello-World.csproj.CoreCompileInputs.cache
+E:\WorkSpace\Intern\Week1-2\Hello-World\obj\Debug\Hello-World.exe
+E:\WorkSpace\Intern\Week1-2\Hello-World\obj\Debug\Hello-World.pdb
