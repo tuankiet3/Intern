@@ -1,0 +1,16 @@
+﻿*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Oo]bj/
+[Bb]in/
+
+.idea/
+
+*.DS_Store
