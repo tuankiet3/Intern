@@ -1,0 +1,264 @@
+﻿@model Register.Models.Student
+@{
+    ViewData["Title"] = "Thông tin thí sinh";
+    var provinces = (List<Province>)ViewBag.provinces;
+    var areas = (List<Area>)ViewBag.areas;
+    var majors = (List<Major>)ViewBag.majors;
+    var aspirations = (List<Aspiration>)ViewBag.aspirations;
+    var highSchools = (List<HighSchool>) ViewBag.highSchools;
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="form-section-title">THÔNG TIN THÍ SINH</h4>
+            <p>
+                Thí sinh vui lòng nhập số CCCD để tra cứu xem đã có thông tin đăng ký trước đây chưa. Nếu kết quả tìm không thấy, thí sinh vui lòng nhập vào các trường thông tin còn thiếu.
+            </p>
+
+            <form asp-action="Index" asp-controller="Home" method="post" >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="CCCD" class="col-sm-4 col-form-label required">Số CCCD</label>
+                            <div class="col-sm-8">
+                                <input name="CCCD" asp-for="CCCD" type="number" class="form-control" id="CCCD" placeholder="Nhập Căn cước công dân">
+                                <span asp-validation-for="CCCD" class="text-danger"></span>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="StudentName" class="col-sm-4 col-form-label required">Họ và tên</label>
+                            <div class="col-sm-8">
+                                <input asp-for="StudentName" name="StudentName" type="text" class="form-control" id="name" placeholder="Nhập Họ và tên">
+                                <span asp-validation-for="StudentName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="DateOfBirth" class="col-sm-4 col-form-label required">Ngày sinh</label>
+                            <div class="col-sm-8">
+                                <input asp-for="DateOfBirth" name="DateOfBirth" type="date" class="form-control" id="dateOfBirth" placeholder="dd/mm/yyyy">
+                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="Gender" class="col-sm-4 col-form-label required">Giới tính</label>
+                            <div class="col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="Gender" name="Gender" class="form-check-input" type="radio" id="male" value="0" checked>
+                                    <label class="form-check-label" for="nam">Nam</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="Gender" name="Gender" class="form-check-input" type="radio" id="female" value="1">
+                                    <label class="form-check-label" for="nu">Nữ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="Phone" class="col-sm-4 col-form-label required">Số điện thoại</label>
+                            <div class="col-sm-8">
+                                <input asp-for="Phone" name="Phone" type="number" class="form-control" id="Phone" placeholder="Nhập số điện thoại">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="Email" class="col-sm-4 col-form-label required">Email</label>
+                            <div class="col-sm-8">
+                                <input asp-for="Email" name="Email" type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email chính">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <p class="form-text-custom">(Các thông báo quan trọng về kết quả, trường sẽ gửi cho thí sinh qua Zalo, SMS và Email)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="Address" class="col-sm-2 col-form-label required">Địa chỉ nhà</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Address" name="Address" type="text" class="form-control" id="address" placeholder="Tổ/Đội, Thôn/ Xóm, Xã-Huyện- Tỉnh hoặc Số nhà, tên đường, Phường, Quận, Tỉnh/ Thành phố">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <p class="form-text-custom">(Nhập đầy đủ Tổ/Đội, Thôn/ Xóm, Xã-Huyện- Tỉnh hoặc Số nhà, tên đường, Phường, Quận, Tỉnh/ Thành phố)</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="ProvinceId" class="col-sm-4 col-form-label required">Tỉnh/ Thành phố</label>
+                            <div class="col-sm-8">
+                                <select asp-for="ProvinceId" class="form-select" id="province" name="ProvinceId">
+                                    <option value"">Chọn tỉnh/thành phố</option>
+                                    @foreach (var province in provinces)
+                                    {
+                                        <option value="@province.ProvinceId">@province.ProvinceName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="ProvinceId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="HighSchoolId" class="col-sm-4 col-form-label required">Trường THPT</label>
+                            <div class="col-sm-8">
+                                <select asp-for="HighSchoolId" class="form-select" id="highSchool">
+                                    <option value="">Chọn trường THPT</option>
+                                    @if (highSchools != null)
+                                    {
+                                        @foreach (var school in highSchools)
+                                        {
+                                            <option value="@school.HighSchoolId" selected="@(Model.HighSchoolId == school.HighSchoolId)">@school.HighSchoolName</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="HighSchoolId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <p class="form-text-custom">(Chọn Tỉnh/ Thành phố bạn đang sinh sống. Nếu là thí sinh tự do thì bạn chọn trường THPT/ TTGDTX đã tốt nghiệp trước đó.)</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label class="col-sm-4 col-form-label required">Khu Vực</label>
+                            <div asp-for="AreaId" class="col-sm-8">
+                                <select asp-for="AreaId" name="AreaId" class="form-select" id="area">
+                                    <option value"">-- Chọn khu vực</option>
+
+                                    @foreach(var area in areas)
+                                    {
+                                       <option value="@area.AreaId">@area.AreaName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="AreaId" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mb-3 align-items-start">
+                            <label asp-for="Prioritize" class="col-sm-4 col-form-label required">Đối Tượng</label>
+                            <div class="col-sm-8">
+                                <select Prioritize name="Prioritize" class="form-select" id="prioritize">
+                                    <option value="0" selected>Không ưu tiên</option>
+                                    <option value="1">Ưu tiên</option>
+                                </select>
+                                <span asp-validation-for="Prioritize" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <h5 class="form-section-title mt-4">THÔNG TIN ĐĂNG KÝ</h5>
+
+                <div class="row mb-3 align-items-start">
+                    <label asp-for="MajorId" class="col-sm-2 col-form-label required">Đăng ký ngành</label>
+                    <div class="col-sm-7">
+                        <select asp-for="MajorId" name="MajorId" class="form-select" id="major">
+                            <option value"">Chọn ngành</option>
+                            @foreach (var major in majors)
+                            {
+                                <option value="@major.MajorId">@major.MajorName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="MajorId" class="text-danger"></span>
+                        <p class=" form-text-custom mt-1"><span class="fw-bold">Ghi chú:</span><br /> Thí sinh được phép đổi ngành phù hợp sau 1 Học kỳ đến 1 năm học theo quy chế của Bộ Giáo dục và Đào tạo.</p>
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-start">
+                    <label asp-for="AspirationId" class="col-sm-2 col-form-label">Có nguyện vọng du học</label>
+                    <div class="col-sm-7">
+                        <select asp-for="AspirationId" name="AspirationId" class="form-select" id="aspiration">
+                            <option value="">Chọn hình thức du học</option>
+                            @foreach (var aspiration in aspirations)
+                            {
+                                <option value="@aspiration.AspirationId">@aspiration.AspirationName</option>
+                            }
+                        </select>
+
+                    </div>
+                    <p class="form-text-custom col-sm-2">Nếu có nguyện vọng du học thì chọn hình thức du học</p>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn text-white" style="background-color: #990000">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#province').change(function() {
+                var provinceId = $(this).val();
+                var highSchoolSelect = $('#highSchool');
+                highSchoolSelect.empty();
+                if (provinceId) {
+                highSchoolSelect.append('<option value="">Chọn trường THPT</option>');  
+                    $.ajax({
+                        url: '@Url.Action("GetHighSchoolsByProvince", "Home")',
+                        type: 'GET',
+                        data: { provinceId: provinceId },
+                        success: function(data) {
+                            $.each(data, function(index, item) {
+                                highSchoolSelect.append('<option value="' + item.id + '">' + item.school + '</option>');
+                            });
+                        },
+                        error: function() {
+                            alert('Có lỗi xảy ra khi tải danh sách trường THPT');
+                        }
+                    });
+                } else {
+                    highSchoolSelect.append('<option value="">Chọn trường THPT</option>');
+                }
+            });
+        });
+    </script>
+}

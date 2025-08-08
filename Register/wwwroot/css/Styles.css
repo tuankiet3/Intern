@@ -1,0 +1,19 @@
+﻿.form-section-title {
+  background-color: #990000;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.col-form-label.required::after {
+  content: " (*)";
+  color: red;
+}
+
+.form-text-custom {
+  font-style: italic;
+  color: black;
+  font-size: 0.9em;
+}
