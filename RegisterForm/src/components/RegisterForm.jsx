@@ -4,8 +4,8 @@ import { api } from "../api/client";
 const initialForm = {
   cccd: "",
   studentName: "",
-  dateOfBirth: "", // yyyy-mm-dd
-  gender: true, // true: male, false: female
+  dateOfBirth: "",
+  gender: true,
   phone: "",
   email: "",
   address: "",
