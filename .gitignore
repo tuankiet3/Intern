@@ -13,4 +13,6 @@ x86/
 
 .idea/
 
-*.DS_Store
+*.DS_Store# 
+Environment files
+Chatbot/.env
