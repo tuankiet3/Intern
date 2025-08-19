@@ -93,7 +93,6 @@ def setup_chatbot():
         raise HTTPException(status_code=500, detail=str(e))
         return False
 
-# Initialize on startup
 @app.on_event("startup")
 async def startup():
     setup_chatbot()
